@@ -21,7 +21,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - run: cat .env >> $GITHUB_ENV
+    - uses: golang-enthusiast/app-yaml-env-compiler@v1.0
 
     # - name: App Engine Deploy
     #   id: deploy
