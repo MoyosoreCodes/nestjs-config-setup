@@ -22,7 +22,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-      run: cat .env >> $GITHUB_ENV
+      # run: cat .env >> $GITHUB_ENV
 
     # - name: App Engine Deploy
     #   id: deploy
