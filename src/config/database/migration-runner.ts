@@ -5,12 +5,17 @@ async function runMigrations() {
   const logger = new Logger('MigrationRunner');
 
   try {
-    logger.log('Running migrations!...');
     await datasource.initialize();
-    await datasource.runMigrations();
+    if (process.env.NODE_ENV === 'test') {
+      logger.log("Synchronizing DB")
+      await datasource.synchronize()
+    } else {
+      logger.log('Running migrations');
+      await datasource.runMigrations();
+    }
   } catch (err) {
     logger.error(`Migrations Failed!: ${err}`);
-    process.exit(0);
+    process.exit(1);
   }
 }
 
