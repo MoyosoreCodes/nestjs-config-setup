@@ -21,8 +21,10 @@ jobs:
         run: npm ci
       - name: Deploy App Engine
         id: deploy
-        uses: etereo-io/deploy-gae-action
+        uses: 'google-github-actions/deploy-appengine@v1'
         with:
           service_account: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.PROJECT_ID }}
           gae_config_path: './app.yaml'
+      - id: 'test'
+        run: 'curl "${{ steps.deploy.outputs.url }}"'
