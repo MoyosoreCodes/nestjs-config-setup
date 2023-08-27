@@ -12,16 +12,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
       - name: Install dependencies
         run: npm ci
+      - name: 'Authenticate to Google Cloud'
+        id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          service_account: 'admin-256@nest-setup-396816.iam.gserviceaccount.com'
       - name: Deploy App Engine
         id: deploy
-        uses: 'google-github-actions/deploy-appengine@main'
+        uses: 'google-github-actions/deploy-appengine@v1'
         with:
-          service_account:  ${{ secrets.GCP_SA_KEY }}
+          service_account: ${{ secrets.GCP_SA_KEY }}
           gae_config_path: './app.yaml'
