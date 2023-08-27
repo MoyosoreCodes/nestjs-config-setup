@@ -23,7 +23,7 @@ jobs:
         id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
-          service_account: 'admin-256@nest-setup-396816.iam.gserviceaccount.com'
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
       - name: Deploy App Engine
         id: deploy
         uses: 'google-github-actions/deploy-appengine@v1'
